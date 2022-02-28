@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Epin conversion</title>
+</head>
+
+<body>
+	<p>Upload file</p>
+	<input type="file" name="inputfile"
+			id="inputfile">
+	<select id="type">
+		<option>Ringo</option>
+	</select>
+	<br>
+	<p>Output</p>
+	<pre id="output"></pre>
+	
+	<script type="text/javascript">
+		let x;
+		let new_file = ""
+		document.getElementById('inputfile')
+			.addEventListener('change', function() {
+			
+			var fr=new FileReader();
+			fr.onload=function(){
+				x = fr.result;
+				let nx = x.split("\n")
+				for(let i=0; nx.length > i; i++){
+					let o = nx[i].split("\t")
+					//console.log(o[2] + "," + o[3] +"," + o[4] + "," + o[5] + "\n")
+					new_file += (o[2] + "," + o[3] +"," + o[4] + "," + o[5] + "\n")
+				}
+				document.getElementById('output').textContent=new_file;
+			}
+			
+			fr.readAsText(this.files[0]);
+		})
+		
+	</script>
+</body>
+
+</html>
